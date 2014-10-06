@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Outcast</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+
+    var parentView = window.opener;
+    var iFrameView = document.getElementById("oauth-iframe-view");
+
+    var init = function() {
+
+      addEventListeners();
+
+      parentView.postMessage('{"event":{"name":"ready","data":null}}')
+    }
+
+    var onMessageReceived = function(e) {
+
+      if(event.origin !== 'http://127.0.0.1:51792') return;
+
+      console.log(e);
+      alert(e.data);
+    }
+
+
+    var onLoadComplete = function(e) {
+
+      console.log(e);
+
+      // parentView.postMessage('', 'http://127.0.0.1:51792');
+    }
+
+    var addEventListeners = function() {
+      window.addEventListener('message', onMessageReceived, false);
+    }
+
+    init();
+
+  <script>
+
+<iframe id="oauth-iframe-view" onLoad="onLoadComplete(e);"></iframe>
+
+</body>
+</html>

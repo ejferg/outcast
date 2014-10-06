@@ -1,0 +1,22 @@
+{
+  "name": "outcast",
+  "version": "0.0.0",
+  "authors": [
+    "Earl Ferguson <earl@ullisen.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.26",
+    "angular-resource": "~1.2.26",
+    "angular-route": "~1.2.26",
+    "angular-touch": "~1.2.26",
+    "underscore.string": "~2.3.3"
+  }
+}
