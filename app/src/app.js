@@ -22,12 +22,12 @@ var outcast = root.outcast = angular.module('outcast', [
 
     $routeProvider
 
-    // .when('/', [
-    //   {
-    //     templateUrl: '/views/app.view.html',
-    //     controller: 'AppController'
-    //   }
-    // ]);
+    .when('/', {
+        templateUrl: '/outcast/app/src/views/content.view.html',
+        controller: 'ContentController'
+      }
+    )
+    .otherwise({ redirectTo: '/' });
 
     // Location Configurations
 

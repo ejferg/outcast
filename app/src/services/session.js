@@ -25,6 +25,16 @@ outcast.factory('Session', [
 
     };
 
+    var setCurrentUser = function(user) {
+
+      storage[AppStorageKeys.CURRENT_USER] = user;
+    }
+
+    var getCurrentUser = function() {
+
+      return storage[AppStorageKeys.CURRENT_USER];
+    }
+
     return {
       setAccessToken: setAccessToken,
       getAccessToken: getAccessToken
