@@ -10,40 +10,73 @@
   <script type="text/javascript">
 
     var parentView = window.opener;
-    var iFrameView = document.getElementById("oauth-iframe-view");
 
     var init = function() {
 
-      addEventListeners();
+      var token = null;
+      var params = getHashParams();
 
-      parentView.postMessage('{"event":{"name":"ready","data":null}}')
-    }
+      console.log(params);
+      console.log(params);
+
+      if(params.hasOwnProperty('access_token')) {
+
+        parentView.postMessage(
+          '{"name":"done","data":"'+ params['access_token'] + '"}',
+          'http://127.0.0.1:51792');
+
+          window.close();
+
+      } else {
+
+        addEventListeners();
+        parentView.postMessage('{"name":"ready","data":null}', 'http://127.0.0.1:51792');
+      }
+    };
+
+    var getHashParams = function() {
+
+      var hashParams = {};
+      var e,
+          a = /\+/g,
+          r = /([^&;=]+)=?([^&;]*)/g,
+          d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+          q = window.location.hash.substring(1);
+
+      while (e = r.exec(q))
+         hashParams[d(e[1])] = d(e[2]);
+
+      return hashParams;
+    };
 
     var onMessageReceived = function(e) {
 
-      if(event.origin !== 'http://127.0.0.1:51792') return;
+      if(e.origin !== 'http://127.0.0.1:51792') return;
 
-      console.log(e);
-      alert(e.data);
-    }
+      var event = JSON.parse(e.data);
+
+      if(event.name == 'updateUrl') {
+
+        console.log(event.data);
+
+        var oauthView = document.getElementById("oauth-iframe-view");
+        window.location = event.data;
+      }
+    };
 
 
-    var onLoadComplete = function(e) {
-
-      console.log(e);
+    var onLoadComplete = function() {
 
       // parentView.postMessage('', 'http://127.0.0.1:51792');
-    }
+    };
 
     var addEventListeners = function() {
       window.addEventListener('message', onMessageReceived, false);
-    }
+    };
 
     init();
 
-  <script>
-
-<iframe id="oauth-iframe-view" onLoad="onLoadComplete(e);"></iframe>
+  </script>
 
 </body>
 </html>

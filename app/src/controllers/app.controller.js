@@ -4,33 +4,41 @@ outcast.controller('AppController', [
 
   '$scope',
   '$log',
-  'Instagram',
+  'Session',
+  'oAuth',
+  'AppEvents',
 
-  function($scope, $log, Instagram) {
+  function($scope, $log, Session, oAuth, AppEvents) {
 
-    // Intialize
-    var init = function() {
 
-      authenicate();
-    };
+    // Authenication
 
-    // Utility
-    var authenicate = function() {
+    var accessToken = Session.getAccessToken();
 
-      Instagram.authenicate().then(
+    if(accessToken) {
 
-          function onSuccess() {
-            $log.info('success');
-          },
+      $log.info('Has access token');
 
-          function onFail() {
-            $log.info('fail');
+    } else {
+
+      oAuth.authenicate();
+
+      var onAuthTokenChangeRef = $scope.$on(
+
+        AppEvents.AUTH_TOKEN_CHANGED,
+
+        function onAuthTokenChange(event, token) {
+
+          if(token) {
+
+            $log.info('Hass access token');
           }
-      );
 
-    };
+          onAuthTokenChangeRef();
 
-    init();
+        });
+    }
+
   }
 
 ]);

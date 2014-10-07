@@ -52,7 +52,7 @@ var outcast = root.outcast = angular.module('outcast', [
     INSTAGRAM: {
       baseUrl: 'https://api.instagram.com/v1/',
       authBaseUrl: 'https://instagram.com/oauth/authorize',
-      redirectUri: 'http://127.0.0.1:51792/outcast/index.html',
+      redirectUri: 'http://127.0.0.1:51792/outcast/app/src/views/oauth.view.html',
       clientId: '9666685503db4d70bce5b70a96c939c0'
     }
 
@@ -63,5 +63,23 @@ var outcast = root.outcast = angular.module('outcast', [
 .constant('AppViews', {
 
   AUTH_VIEW: {url: '/outcast/app/src/views/oauth.view.html'}
+
+})
+
+// App Storage Keys
+
+.constant('AppStorageKeys', {
+
+  ACCESS_TOKEN: 'accessToken',
+  MEDIA: ''
+
+})
+
+
+// App Events
+
+.constant('AppEvents', {
+
+  AUTH_TOKEN_CHANGED: 'authTokenChanged'
 
 });
