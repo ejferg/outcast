@@ -1,9 +1,10 @@
 outcast.factory('CastReceiver', [
 
   '$rootScope',
+  '$window',
   'AppCast',
 
-  function($rootScope, AppCast) {
+  function($rootScope, $window, AppCast) {
 
     var manager = null;
     var messageBus = null;
@@ -18,9 +19,14 @@ outcast.factory('CastReceiver', [
       messageBus = manager.getCastMessageBus(AppCast.NAMESPACE);
 
       addEventListeners();
-
+      start();
     };
 
+    // Start
+
+    var start = function() {
+      manager.start({statusText: "Application is starting"});
+    }
 
     // Event handlers
 
