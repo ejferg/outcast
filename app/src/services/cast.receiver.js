@@ -41,6 +41,8 @@ outcast.factory('CastReceiver', [
 
     var onMessage = function(e) {
       $log.info(e);
+
+      messageBus.send(e.senderId, e.data);
     };
 
     var addEventListeners = function() {
