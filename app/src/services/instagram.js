@@ -28,16 +28,16 @@ outcast.factory('Instagram', [
 
       var accessToken = Session.getAccessToken();
 
-      var url = _.str.sprintf('%s/users/self?access_token=%s', baseUrl, accessToken);
+      var url = _.str.sprintf('%s/users/self??callback=JSON_CALLBACK&access_token=%s', baseUrl, accessToken);
 
-      return $http.get(url);
+      return $http.jsonp(url);
     }
 
     var getTags = function() {
 
-      var url = _.str.sprintf('%s/tags/outkastatlast/media/recent?client_id=%s', baseUrl, clientId);
+      var url = _.str.sprintf('%s/tags/outkastatlast/media/recent/?callback=JSON_CALLBACK&client_id=%s', baseUrl, clientId);
 
-      return $http.get(url);
+      return $http.jsonp(url);
     }
 
     return {

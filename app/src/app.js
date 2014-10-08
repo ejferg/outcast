@@ -2,16 +2,22 @@
 
 var root = window;
 
-// Application Configuration
+// Application Bootstrap
 
 var outcast = root.outcast = angular.module('outcast', [
 
-  // App Dependecies
+  // Application Dependecies
 
   'ngRoute',
   // 'ngTouch'
+  'angularLoad'
 
-]).config([
+])
+
+
+// Application Configurations
+
+.config([
 
   '$routeProvider',
   '$locationProvider',
@@ -22,17 +28,35 @@ var outcast = root.outcast = angular.module('outcast', [
 
     $routeProvider
 
-    .when('/', {
-        templateUrl: '/outcast/app/src/views/content.view.html',
-        controller: 'ContentController'
+    // Sender View Route Configuration
+    .when('/sender', {
+        templateUrl: '/outcast/app/src/views/cast.sender.view.html',
+        controller: 'CastSenderViewController',
+        resolve: {
+          script: function(Script) {
+            return Script.load('https://www.gstatic.com/cv/js/sender/v1/cast_sender.js');
+          }
+        }
       }
     )
-    .otherwise({ redirectTo: '/' });
+
+    // Reciever View Route Configuration
+    .when('/receiver', {
+        templateUrl: '/outcast/app/src/views/cast.receiver.view.html',
+        controller: 'CastReceiverViewController',
+        resolve: {
+          script: function(Script) {
+            return Script.load('https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
+          }
+        }
+      }
+    )
+
+    .otherwise({ redirectTo: '/sender' });
 
     // Location Configurations
 
-    $locationProvider.hashPrefix('!');
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
   }
 
 ])
@@ -81,5 +105,12 @@ var outcast = root.outcast = angular.module('outcast', [
 .constant('AppEvents', {
 
   AUTH_TOKEN_CHANGED: 'authTokenChanged'
+
+})
+
+.constant('AppCast', {
+
+  APPLICATION_ID: 'EF51F052',
+  NAMESPACE: 'urn:x-cast:com.ejferg.outcast'
 
 });
