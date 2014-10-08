@@ -33,8 +33,9 @@ outcast.factory('CastSender', [
       chrome.cast.initialize(config, onSuccess, onError);
     };
 
-    var onSuccess = function() {
+    var onSuccess = function(e) {
 
+      $log.info(e);
       $log.info('Initialization Complete')
 
     };

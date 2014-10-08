@@ -2,8 +2,9 @@ outcast.controller('CastReceiverViewController', [
 
   '$scope',
   '$log',
+  'CastReceiver',
 
-  function($scope, $log) {
+  function($scope, $log, CastReceiver) {
 
   }
 
