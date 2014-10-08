@@ -31,6 +31,7 @@ outcast.factory('CastSender', [
       var config = new chrome.cast.ApiConfig(sessionRequest,sessionListener,receiverListener);
 
       chrome.cast.initialize(config, onSuccess, onError);
+
     };
 
     var onSuccess = function(e) {
@@ -63,8 +64,9 @@ outcast.factory('CastSender', [
 
     };
 
-    var onReceiverReady = function() {
+    var onReceiverReady = function(e) {
 
+      $log.info(e);
     };
 
     var sendMessage = function(message) {
@@ -83,7 +85,7 @@ outcast.factory('CastSender', [
           session = e;
           sendMessage(message);
 
-        }, successListener, errorListener);
+        }, errorListener);
 
       }
     };
