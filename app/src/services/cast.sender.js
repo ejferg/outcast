@@ -30,6 +30,7 @@ outcast.factory('CastSender', [
 
       var config = new chrome.cast.ApiConfig(sessionRequest,sessionListener,receiverListener);
 
+<<<<<<< HEAD
       chrome.cast.initialize(config, onSenderInitializationComplate, onError);
 
     };
@@ -37,10 +38,18 @@ outcast.factory('CastSender', [
     var onSenderInitializationComplate {
 
       $log.info('Initialization Complete');
+=======
+      chrome.cast.initialize(config, onSuccess, onError);
+>>>>>>> 96fe40ab652bfc98223f1a22fbe5823923cd8418
     };
 
     var onSuccess = function() {
 
+<<<<<<< HEAD
+=======
+      $log.info('Initialization Complete')
+
+>>>>>>> 96fe40ab652bfc98223f1a22fbe5823923cd8418
     };
 
     var onError = function(error) {
@@ -66,9 +75,14 @@ outcast.factory('CastSender', [
 
     };
 
+<<<<<<< HEAD
     var onReceiverReady = function(e) {
 
       $log.info(e);
+=======
+    var onReceiverReady = function() {
+
+>>>>>>> 96fe40ab652bfc98223f1a22fbe5823923cd8418
     };
 
     var sendMessage = function(message) {
@@ -87,7 +101,11 @@ outcast.factory('CastSender', [
           session = e;
           sendMessage(message);
 
+<<<<<<< HEAD
         }, errorListener);
+=======
+        }, successListener, errorListener);
+>>>>>>> 96fe40ab652bfc98223f1a22fbe5823923cd8418
 
       }
     };
